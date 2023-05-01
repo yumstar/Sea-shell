@@ -136,3 +136,29 @@ GitHub.sublime-settings
 !.vscode/launch.json 
 !.vscode/extensions.json 
 .history
+
+
+################ Client
+seashell_client/.DS_Store
+seashell_client/node_modules
+seashell_client/dist
+
+
+# local env files
+seashell_client/.env.local
+seashell_client/.env.*.local
+
+# Log files
+seashell_client/npm-debug.log*
+seashell_client/yarn-debug.log*
+seashell_client/yarn-error.log*
+seashell_client/pnpm-debug.log*
+
+# Editor directories and files
+seashell_client/.idea
+seashell_client/.vscode
+seashell_client/*.suo
+seashell_client/*.ntvs*
+seashell_client/*.njsproj
+seashell_client/*.sln
+seashell_client/*.sw?
