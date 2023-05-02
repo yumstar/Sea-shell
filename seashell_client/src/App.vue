@@ -16,6 +16,10 @@ import AppFooter from "./components/AppFooter.vue";
 // import MessageRead from "./components/MessageRead.vue";
 // import ComposeMessage from "./components/ComposeMessage.vue";
 import '@coreui/coreui/dist/css/coreui.min.css'
+import axios from "axios";
+export const client = axios.create({
+  baseURL: "http://127.0.0.1:8000"
+})
 export default {
   name: 'App',
   components: {

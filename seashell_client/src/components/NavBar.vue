@@ -56,7 +56,7 @@ a.nav-item {
     color: grey;
     // }
     :hover  {
-        color: black;
+        // color: black;
     }
 }
 
@@ -67,22 +67,21 @@ a.nav-item {
     justify-content: space-between;
     background-color: white;
     border: none;
-
 }
 
 .p-menubar-start{
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-        border: 1px solid black;
-        display: none;    
+        // display: flex;
+        // flex-direction: row;
+        // width: 100%;
+        // border: 1px solid black;
+        // display: none;    
 }
 
 .p-menubar-root-list {
-    border: 2px solid black;
-    // width: 90%;
-    display: flex;
-    flex-direction: row;
+    // border: 2px solid black;
+    // // width: 90%;
+    // display: flex;
+    // flex-direction: row;
 }
 @font-face {
     font-family: 'Barlow Semi Condensed';

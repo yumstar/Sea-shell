@@ -34,7 +34,7 @@ class CenterUserSignin(APIView):
         if serializer.is_valid(raise_exception=True):
             authenticated_user = serializer.authenticate_user(request.data)
             login(request, authenticated_user)
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response({'message': 'Login sucessful.'}, status=status.HTTP_200_OK)
 
 
 class CenterUserSignout(APIView):

@@ -1,4 +1,5 @@
 <template>
+    <h1 class="reporter-question">Hi, how was your day?</h1>
     <CContainer class="experience-reporter">
         <ExperienceChoiceCard v-for="(experience, index) in experiences" :name="experience.word" :value="experience.rank" :icon="experience.icon" class="experience-choice" :class="{selected: index == selectedIndex.selected}" :selected="index == selectedIndex.selected" :key="experience.word" @click="setSelected(index)"></ExperienceChoiceCard>
     </CContainer>
@@ -61,5 +62,8 @@ const setSelected = (index) =>{
 
 .selected{
         border: 2px solid rgba(80,149,255,0.27);
-    }
+}
+.reporter-question {
+    margin-bottom: 1em;
+}
 </style>
