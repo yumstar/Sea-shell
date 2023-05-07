@@ -1,13 +1,11 @@
 <template>
     <div>
-        <!-- <ExperienceModule></ExperienceModule> -->
-        <SignIn></SignIn>
+        <span>home</span>
     </div>
 </template>
 
 <script setup>
-// import ExperienceModule from './ExperienceModule.vue';
-import SignIn from './SignIn.vue';
+
 </script>
 
 <style lang="scss" scoped>

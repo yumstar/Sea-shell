@@ -40,7 +40,7 @@ class CenterUserSignin(APIView):
 class CenterUserSignout(APIView):
     def post(self, request):
         logout(request)
-        return Response(status=status.HTTP_200_OK)
+        return Response({'message': 'Logout sucessful.'}, status=status.HTTP_200_OK)
 
 
 class CenterUserView(APIView):

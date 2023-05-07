@@ -49,15 +49,9 @@ a.nav-item {
     margin-left: 2em;
     margin-right: 1em;
     font-size: 1.5em;
-    // border: 2px solid black;
     font-family: 'Barlow Semi Condensed';
-    // a {
     text-decoration: none;
     color: grey;
-    // }
-    :hover  {
-        // color: black;
-    }
 }
 
 
@@ -67,21 +61,6 @@ a.nav-item {
     justify-content: space-between;
     background-color: white;
     border: none;
-}
-
-.p-menubar-start{
-        // display: flex;
-        // flex-direction: row;
-        // width: 100%;
-        // border: 1px solid black;
-        // display: none;    
-}
-
-.p-menubar-root-list {
-    // border: 2px solid black;
-    // // width: 90%;
-    // display: flex;
-    // flex-direction: row;
 }
 @font-face {
     font-family: 'Barlow Semi Condensed';
