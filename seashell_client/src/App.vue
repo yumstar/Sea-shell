@@ -1,9 +1,7 @@
 <template>
-  <div class="app" @signout="() => {}">
   <NavBar></NavBar>
   <router-view class="app-body"></router-view>
   <AppFooter></AppFooter>
-</div>
 </template>
 
 <script>
@@ -35,13 +33,7 @@ const toggleAuthentication = () => {
   state.authenticated = state.token? true: false
 }
 
-const signOut = () => {
-  client.post("api/centerUser/signout",  {withCredentials: true}).then(() => {
-    const $cookies = inject('$cookies')
-    $cookies.remove('csrftoken')
-    state.token = null
-  })
-}
+
 watch(state, toggleAuthentication)
 export default {
   name: 'App',

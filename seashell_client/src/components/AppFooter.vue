@@ -1,17 +1,14 @@
 <template>
     <div class="footer">
         <a href="https://www.flaticon.com/free-icons/seashell" title="seashell icons">Seashell icons created by Freepik - Flaticon</a>
-        <Button type="button" label="sign-out" @click="signOut">Sign Out</Button>
+        <Button type="button" label="sign-out" @click="authStatusStore.signOut()">Sign Out</Button>
     </div>
 </template>
 
 <script setup>
-import {defineEmits} from "vue"
 import Button from 'primevue/button';
-const emit = defineEmits(['clicl'])
-const signOut = () => {
-    emit('signout')
-}
+import { useAuthStatusStore } from "@/stores/authStatus";
+const authStatusStore = useAuthStatusStore();
 </script>
 
 <style lang="scss" scoped>

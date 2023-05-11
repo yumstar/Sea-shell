@@ -1,7 +1,9 @@
 import { createApp } from 'vue'
+import { createPinia } from 'pinia'
 import PrimeVue from 'primevue/config';
 import App from './App.vue'
 import VueCookies from 'vue-cookies'
+
 // import { createRouter, createWebHistory } from 'vue-router'
 import router from './router';
 import "primevue/resources/themes/mira/theme.css"
@@ -17,8 +19,9 @@ const icons = {
   cilMoodBad,
 
 }
-
-const app = createApp(App)
+const pinia = createPinia()
+export const app = createApp(App)
+app.use(pinia)
 app.use(router)
 app.use(PrimeVue);
 app.use(VueCookies, { expires: '7d'})
