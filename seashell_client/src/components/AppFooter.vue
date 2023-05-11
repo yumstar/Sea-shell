@@ -13,7 +13,8 @@ const authStatusStore = useAuthStatusStore();
 
 <style lang="scss" scoped>
 .footer{
-    // position: absolute;
+    position: absolute;
+    width: 100%;
     display: flex;
     top: 100%;
     flex-direction: row;

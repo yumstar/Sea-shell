@@ -18,15 +18,16 @@ import { useForm } from 'vee-validate';
 import Button from 'primevue/button';
 import EmailInputField from './InputFields/EmailInputField.vue';
 import PasswordInputField from './InputFields/PasswordInputField.vue';
-import {client} from "../App.vue"
-
+import { useAuthStatusStore } from "@/stores/authStatus";
+const authStatusStore = useAuthStatusStore()
+import router from '@/router';
 const { handleSubmit, resetForm } = useForm();
 const onSubmit = handleSubmit((values) =>{
-    client.post("api/centerUser/signin", values)
-    .then((res) => {
-        console.log(res)
+    authStatusStore.signIn(values)
+    .then(() => {
+        resetForm()
+        router.push("/")
     })
-    resetForm()
 } )
 </script>
 
@@ -55,14 +56,9 @@ const onSubmit = handleSubmit((values) =>{
     display: flex;
     flex-direction: column;
     border-radius: var(--border-radius);
-    // border-color: var(--primary-color);
     background-color: var(--primary-color);
     color: var(--primary-color-text);
     opacity: 1;
-    // &:hover{
-    //     animation: fadeIn 1s linear;
-    //     animation-fill-mode: forwards;
-    // }
     a {
         color: var(--secondary-color);
         &:hover {
@@ -71,21 +67,5 @@ const onSubmit = handleSubmit((values) =>{
     }
 
 }
-
-// @keyframes fadeIn {
-//     0% {
-//         opacity: 0.8;
-//     }
-
-//     1% {
-//         opacity: 0.81;
-//     }
-//     50%{
-//         opacity: 0.9;
-//     }
-//     100% {
-//         opacity: 1;
-//     }
-// }
 
 </style>

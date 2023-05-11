@@ -1,11 +1,13 @@
 import { defineStore } from 'pinia'
-import {ref} from "vue"
+import {computed, ref} from "vue"
 import axios from 'axios'
 import { app } from '@/main'
 export const useAuthStatusStore = defineStore('authStatus',() => {
     const $cookies = app.$cookies
     const isAuthenticated = ref(false)
     const token = ref('')
+    const getToken = computed(() => token.value)
+    const getIsAuthenticated = computed(() => isAuthenticated.value)
     const authUrl = ref("http://127.0.0.1:8000/api/centerUser/") 
     async function signOut() {
         try {
@@ -28,5 +30,5 @@ export const useAuthStatusStore = defineStore('authStatus',() => {
             throw Error("Error signing in.") 
         }
     }
-    return {isAuthenticated, token, signIn, signOut}
+    return {isAuthenticated, token, getToken, getIsAuthenticated, signIn, signOut}
 })

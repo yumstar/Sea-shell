@@ -4,10 +4,10 @@ import MessageRead from "./components/MessageRead"
 import ExperienceModule from "./components/ExperienceModule"
 const routes = [
     { path: '/', name: "home", component: HomePage },
-    { path: '/messages', component: MessageRead },
-    { path: '/experience', component: ExperienceModule},
-    { path: '/sign-in', component: () => import("./components/SignIn")},
-    { path: '/register', component: () => import("./components/RegisterUser")}
+    { path: '/messages',name: "messages", component: MessageRead },
+    { path: '/experience', name: "experiences", component: ExperienceModule},
+    { path: '/sign-in', name: "sign-in", component: () => import("./components/SignIn")},
+    { path: '/register', name: "register", component: () => import("./components/RegisterUser")}
   ]
   export const router = createRouter({
     history: createWebHistory(),

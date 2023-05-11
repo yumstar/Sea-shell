@@ -10,8 +10,8 @@ import NavBar from "./components/NavBar.vue"
 import AppFooter from "./components/AppFooter.vue";
 import '@coreui/coreui/dist/css/coreui.min.css'
 import axios from "axios";
-import { reactive, inject, watch} from "vue";
 import { router } from "./router.js"
+import { useAuthStatusStore } from "@/stores/authStatus";
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
@@ -19,22 +19,20 @@ axios.defaults.withCredentials = true;
 export const client = axios.create({
   baseURL: "http://127.0.0.1:8000"
 })
-const state = reactive({authenticated: false, token: null})
 router.beforeEach(async (to) => {
-  if((to.path === '/' || to.path === '/register')){
+  const authStatusStore = useAuthStatusStore()
+  if((to.name === 'home' || to.name === 'register')){
     return true
   }
-  if(!state.authenticated && to.path !== '/sign-in'){
+  if(!authStatusStore.getIsAuthenticated && to.name !== 'sign-in'){
     return {path: "/sign-in"}
   }
 })
 
-const toggleAuthentication = () => {
-  state.authenticated = state.token? true: false
-}
 
 
-watch(state, toggleAuthentication)
+
+
 export default {
   name: 'App',
   components: {
@@ -43,8 +41,6 @@ export default {
     AppFooter
 },
   setup() {
-    const $cookies = inject('$cookies')
-    state.token = $cookies.get('csrftoken')
   }
 }
 </script>
