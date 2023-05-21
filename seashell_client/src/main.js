@@ -3,7 +3,7 @@ import { createPinia } from 'pinia'
 import PrimeVue from 'primevue/config';
 import App from './App.vue'
 import VueCookies from 'vue-cookies'
-
+import './index.css'
 // import { createRouter, createWebHistory } from 'vue-router'
 import router from './router';
 import "primevue/resources/themes/mira/theme.css"

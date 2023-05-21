@@ -45,7 +45,7 @@ class Message(models.Model):
     body = models.TextField(blank=True)
     # time
     created = models.DateTimeField(auto_now_add=True)
-    tags = models.ManyToManyField(Tag)
+    tags = models.ManyToManyField(Tag, related_name='tags')
 
     def __str__(self):
         return self.created.__str__() + ": " + self.body.__str__()

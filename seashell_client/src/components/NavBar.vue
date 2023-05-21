@@ -7,8 +7,8 @@
                 </router-link>
             </template>
             <template #start>
-                <img alt="logo" src="../assets/seashell.png" id="app-logo" draggable="false"/>
-                <h1> Seashell</h1>
+                <img alt="logo" src="../assets/seashell.png" id="app-logo" draggable="false" class="h-14 w-14 mx-auto"/>
+                <h1 class="text-3xl"> Seashell</h1>
             </template>
         </Menubar>
     </div>
@@ -39,7 +39,7 @@ const items = ref([
 <style lang="scss" scoped>
 // @import url('https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500&display=swap');
 #app-logo {
-    height: 2em;
+    // height: 2em;
     user-select: none;
 }
 h1 {

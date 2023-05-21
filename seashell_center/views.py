@@ -6,7 +6,7 @@ from rest_framework.response import  Response
 from .serializers import CenterUserSerializer, CenterUserRegisterSerializer, CenterUserSigninSerializer, TagSerializer, MessageSerializer, DayExperienceSerializer
 from rest_framework import permissions, status, generics
 from .validation import validate_user_data, validate_user_email, validate_user_password
-from .models import Message, Tag, DayExperience
+from .models import Message, Tag, DayExperience, CenterUser
 from .permissions import IsUser
 # Create your views here.
 
@@ -77,12 +77,12 @@ class MessageView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Message.objects.all()
     serializer_class = MessageSerializer
     permission_classes = (permissions.IsAuthenticated,IsUser,)
+    tags = Tag.objects.filter(user_id__in=CenterUser.objects.all()).values()
 
 class DayExperienceListView(generics.ListCreateAPIView):
     queryset = DayExperience.objects.all()
     serializer_class = DayExperienceSerializer
     permission_classes = (permissions.IsAuthenticated, IsUser,)
-
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
