@@ -1,5 +1,6 @@
 from django.core.exceptions import ValidationError
 from django.contrib.auth import get_user_model
+from .models import Tag
 
 UserModel = get_user_model()
 
@@ -35,3 +36,9 @@ def validate_user_password(user_data):
     if not email:
         raise ValidationError('Please provide a password.')
     return True
+
+def validate_tag_data(data, user):
+    tag_text = data['text']
+    if Tag.objects.filter(user=user, text=tag_text):
+        raise ValidationError('Tag for given user already exists.')
+    return data

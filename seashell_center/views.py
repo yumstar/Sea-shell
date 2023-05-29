@@ -5,9 +5,10 @@ from rest_framework.views import APIView
 from rest_framework.response import  Response
 from .serializers import CenterUserSerializer, CenterUserRegisterSerializer, CenterUserSigninSerializer, TagSerializer, MessageSerializer, DayExperienceSerializer
 from rest_framework import permissions, status, generics
-from .validation import validate_user_data, validate_user_email, validate_user_password
+from .validation import validate_user_data, validate_user_email, validate_user_password, validate_tag_data
 from .models import Message, Tag, DayExperience, CenterUser
 from .permissions import IsUser
+from django.http import HttpResponse, JsonResponse
 # Create your views here.
 
 
@@ -57,6 +58,16 @@ class TagListView(generics.ListCreateAPIView):
     serializer_class = TagSerializer
     permission_classes = (permissions.IsAuthenticated,IsUser,)
 
+    def post(self, request, *args, **kwargs):
+        data = request.data.copy()
+        if not hasattr(data, 'user'):
+            data['user'] = self.request.user.center_user_id
+        validated_data = validate_tag_data(data, self.request.user)
+        serializer = TagSerializer(data=validated_data)
+        if serializer.is_valid(raise_exception=True):
+            self.perform_create(serializer)
+            return Response(status=status.HTTP_201_CREATED)
+        return Response({'message':'Tag not able to be created.'},status=status.HTTP_400_BAD_REQUEST)
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
@@ -70,14 +81,16 @@ class MessageListView(generics.ListCreateAPIView):
     serializer_class = MessageSerializer
     permission_classes = (permissions.IsAuthenticated,IsUser,)
 
+
+
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
 
 class MessageView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Message.objects.all()
     serializer_class = MessageSerializer
     permission_classes = (permissions.IsAuthenticated,IsUser,)
-    tags = Tag.objects.filter(user_id__in=CenterUser.objects.all()).values()
 
 class DayExperienceListView(generics.ListCreateAPIView):
     queryset = DayExperience.objects.all()

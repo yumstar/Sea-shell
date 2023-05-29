@@ -4,14 +4,14 @@ import axios from 'axios'
 import { app } from '@/main'
 export const useAuthStatusStore = defineStore('authStatus',() => {
     const $cookies = app.$cookies
-    const isAuthenticated = ref($cookies.get('csrftoken').length > 0)
+    const isAuthenticated = ref($cookies.get('csrftoken') && $cookies.get('csrftoken').length > 0)
     const token = ref($cookies.get('csrftoken'))
     const getToken = computed(() => token.value)
     const getIsAuthenticated = computed(() => isAuthenticated.value)
     const authUrl = ref("http://127.0.0.1:8000/api/centerUser/") 
     async function signOut() {
         try {
-            await axios.post(authUrl.value + "signout", )
+            await axios.post(authUrl.value + "signout", {})
             $cookies.remove('csrftoken')
             token.value = ''
             isAuthenticated.value = false  

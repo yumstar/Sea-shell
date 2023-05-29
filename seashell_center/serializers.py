@@ -27,6 +27,7 @@ class CenterUserSigninSerializer(serializers.Serializer):
 class CenterUserSerializer(serializers.ModelSerializer):
     messages = serializers.PrimaryKeyRelatedField(many=True, queryset=Message.objects.all())
     tags = serializers.PrimaryKeyRelatedField(many=True, queryset=Tag.objects.all())
+    # tags = serializers.SlugRelatedField(many=True, read_only=True, slug_field='text')
     user = serializers.ReadOnlyField(source='user.username')
     class Meta:
         model = UserModel
@@ -40,6 +41,7 @@ class TagSerializer(serializers.ModelSerializer):
 
 
 class MessageSerializer(serializers.ModelSerializer):
+    tags = serializers.SlugRelatedField(many=True, read_only=True, slug_field='text')
     class Meta:
         model = Message
         fields = ['id', 'user', 'body', 'created', 'tags']

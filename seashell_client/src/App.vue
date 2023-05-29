@@ -55,9 +55,11 @@ export default {
   color: #2c3e50;
   margin-top: 30px;
   font-family: 'Questrial';
+  min-height: 100vh;
 }
 .app-body {
   min-height: 100vh;
+  /* height: 100vh; */
   height: 100%;
 }
 @font-face {
