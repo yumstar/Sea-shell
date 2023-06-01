@@ -41,10 +41,19 @@ class TagSerializer(serializers.ModelSerializer):
 
 
 class MessageSerializer(serializers.ModelSerializer):
-    tags = serializers.SlugRelatedField(many=True, read_only=True, slug_field='text')
+    tags = TagSerializer(many=True)
     class Meta:
         model = Message
         fields = ['id', 'user', 'body', 'created', 'tags']
+    def create(self, validated_data):
+        tags_data = validated_data.pop('tags')
+        message_user = validated_data['user']
+        message = Message.objects.create(**validated_data)
+        for tag_data in tags_data:
+            tag_obj, created = Tag.objects.get_or_create(text=tag_data['text'], user=message_user, defaults={'color': 'black'})
+            message.tags.add(tag_obj)
+        return message
+
 
 
 class DayExperienceSerializer(serializers.ModelSerializer):

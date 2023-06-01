@@ -1,8 +1,8 @@
 <template>
     <div class="input-field">
         <span class="p-float-label">
-            <MultiSelect id="existing-tags" v-model="value" :options="state.tags" optionLabel="name"  display="chip" placeholder="Select Cities" class="input-field-multi-select" filter/>
-                <label for="existing-tags">Existing Tags</label>
+            <MultiSelect id="existingTags" v-model="value" :options="state.tags" optionLabel="name"  display="chip" placeholder="Select Cities" class="input-field-multi-select" filter/>
+                <label for="existingTags">Existing Tags</label>
         </span>
         <small class="p-error" id="text-error">{{ errorMessage || '&nbsp;' }}</small>
     </div>
@@ -13,7 +13,7 @@ import { useField } from 'vee-validate';
 import { client } from '@/App.vue';
 import { reactive} from 'vue';
 import MultiSelect from 'primevue/multiselect'
-const { value, errorMessage } = useField('existing-tags', validateTag);
+const { value, errorMessage } = useField('existingTags', validateTag);
 
 var state = reactive({
     tags: []

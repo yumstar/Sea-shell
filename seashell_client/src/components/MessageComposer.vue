@@ -26,19 +26,22 @@ import ExistingTagInputField from './InputFields/ExistingTagInputField.vue';
 import NewTagInputField from './InputFields/NewTagInputField.vue';
 import ProgressSpinner from 'primevue/progressspinner';
 import Button from 'primevue/button';
-import { client } from '@/App.vue';
+// import { client } from '@/App.vue';
 const { handleSubmit} = useForm();
 const onSubmit = handleSubmit((values) =>{
-    if (typeof values.newTags !== 'undefined'){
-        let tagsToCheck = []
-        values.newTags.forEach(tag => tagsToCheck.push({text: tag, color: "black"}))
-        values.newTags = tagsToCheck
-        console.log(values)
-        for(var i = 0; i < tagsToCheck.length; i++){
-            client.post("api/tag/", tagsToCheck[i])
-        }
+    const tags = [...values.existingTags['name'], ...values.newTags]
+    values.tags = tags
+    console.log(values)
+    // if (typeof values.newTags !== 'undefined'){
+    //     let tagsToCheck = []
+    //     values.newTags.forEach(tag => tagsToCheck.push({text: tag, color: "black"}))
+    //     values.newTags = tagsToCheck
+    //     console.log(values)
+    //     for(var i = 0; i < tagsToCheck.length; i++){
+    //         client.post("api/tag/", tagsToCheck[i])
+    //     }
         
-    }
+    // }
 } )
 </script>
 

@@ -1,6 +1,6 @@
 from django.core.exceptions import ValidationError
 from django.contrib.auth import get_user_model
-from .models import Tag
+from .models import Tag, Message
 
 UserModel = get_user_model()
 
@@ -39,6 +39,12 @@ def validate_user_password(user_data):
 
 def validate_tag_data(data, user):
     tag_text = data['text']
-    if Tag.objects.filter(user=user, text=tag_text):
+    if Tag.objects.filter(user=user, text=tag_text).exists():
         raise ValidationError('Tag for given user already exists.')
+    return data
+
+def validate_message_data(data, user):
+    message_body = data['body']
+    if Message.objects.filter(user=user, body=message_body).exists():
+        raise ValidationError('Message for given user already exists.')
     return data

@@ -37,7 +37,7 @@ class CenterUser(AbstractBaseUser, PermissionsMixin):
 class Tag(models.Model):
     user = models.ForeignKey('seashell_center.CenterUser', related_name="tags", on_delete=models.CASCADE)
     text = models.CharField(blank=False, max_length=60)
-    color = models.CharField(max_length= 50)
+    color = models.CharField(max_length= 50, default='black')
 
 class Message(models.Model):
     user = models.ForeignKey('seashell_center.CenterUser', related_name='messages', on_delete=models.CASCADE)

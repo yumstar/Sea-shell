@@ -2,7 +2,7 @@
     <div class="message-block">
         {{props.body}}
         <div class="message-tags p-3">
-        <Chip v-for="tag in tags" :key="tag">{{ tag }}</Chip>  
+        <Chip v-for="tag in tags" :key="tag">{{ tag.text }}</Chip>  
         </div>
     </div>
 </template>
