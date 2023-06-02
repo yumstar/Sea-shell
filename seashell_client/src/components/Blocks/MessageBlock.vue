@@ -1,5 +1,5 @@
 <template>
-    <div class="message-block">
+    <div class="message-block mx-3 p-3">
         {{props.body}}
         <div class="message-tags p-3">
         <Chip v-for="tag in tags" :key="tag">{{ tag.text }}</Chip>  

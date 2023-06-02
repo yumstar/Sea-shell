@@ -29,10 +29,10 @@ const items = ref([
         label: "Read",
         link: "/messages"
     },
-    {
-        label: "Day",
-        link: "/experience"
-    }
+    // {
+    //     label: "Day",
+    //     link: "/experience"
+    // }
 ])
 </script>
 

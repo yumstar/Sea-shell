@@ -1,7 +1,7 @@
 <template>
     <div class="input-field">
         <span class="p-float-label">
-                <Textarea id="message" v-model="value" type="text" :class="{ 'p-invalid': errorMessage }" aria-describedby="text-error" />
+                <Textarea id="body" v-model="value" type="text" :class="{ 'p-invalid': errorMessage }" aria-describedby="text-error"  class="w-100"/>
                 <label for="message">Message</label>
         </span>
         <small class="p-error" id="text-error">{{ errorMessage || '&nbsp;' }}</small>
@@ -11,7 +11,7 @@
 <script setup>
 import { useField } from 'vee-validate';
 import Textarea from 'primevue/textarea'
-const { value, errorMessage } = useField('message', validateMessage);
+const { value, errorMessage } = useField('body', validateMessage);
 
 function validateMessage(value) {
     if (!value) {

@@ -1,9 +1,11 @@
 <template>
-    <div class="create-message">
+    <h1 class="h1">Ocean not bright enough?</h1>
+    <div class="create-message my-5">
         <div class="message-composer">
             <form @submit="onSubmit" class="sign-in-form">
             <h2>Write down an affirmation.</h2>
             <MessageInputField />
+            <h3>Mark it for when you need it.</h3>
             <Suspense>
             <ExistingTagInputField/>
             <template #fallback>
@@ -26,12 +28,25 @@ import ExistingTagInputField from './InputFields/ExistingTagInputField.vue';
 import NewTagInputField from './InputFields/NewTagInputField.vue';
 import ProgressSpinner from 'primevue/progressspinner';
 import Button from 'primevue/button';
-// import { client } from '@/App.vue';
+import { client } from '@/App.vue';
 const { handleSubmit} = useForm();
 const onSubmit = handleSubmit((values) =>{
-    const tags = [...values.existingTags['name'], ...values.newTags]
+    var tags = []
+    if (typeof values.newTags !== 'undefined'){
+        values.newTags.forEach((tag) => {tags.push({"text": tag})})
+    }
+    if(typeof values.existingTags !== 'undefined'){
+        values.existingTags.forEach((tag) => tags.push({"text": tag.name, "id": tag.code}))
+    }
+    // values.existingTags.forEach((tag) => tags.push({"text": tag.name, "id": tag.code}))
+    // const tags = [...values.existingTags, ...values.newTags]
+    delete values.newTags
+    delete values.existingTags
     values.tags = tags
-    console.log(values)
+    client.post("/api/message/", values).then(() => {
+        window.location.reload()
+    })
+    // console.log(values)
     // if (typeof values.newTags !== 'undefined'){
     //     let tagsToCheck = []
     //     values.newTags.forEach(tag => tagsToCheck.push({text: tag, color: "black"}))

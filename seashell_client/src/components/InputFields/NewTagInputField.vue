@@ -1,7 +1,7 @@
 <template>
     <div class="input-field">
         <span class="p-float-label">
-            <Chips id="newTags" v-model="value" :class="{ 'p-invalid': errorMessage }" aria-describedby="chips-error" class="chips"/>
+            <Chips id="newTags" v-model="value" :class="{ 'p-invalid': errorMessage }" aria-describedby="chips-error" class="chips mx-auto"/>
             <label for="message">New Tags</label>
         </span>
         <small class="p-error" id="text-error">{{ errorMessage || '&nbsp;' }}</small>
@@ -24,9 +24,11 @@ function validateTag() {
 <style lang="scss" scoped>
 .input-field{
     padding-top: 1em;
+    // width: 100%;
+
 }
 .chips{
     max-width: 25em;
-    // width: 25em;
+    width: 25em;
 }
 </style>
