@@ -11,21 +11,25 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+env = environ.Env()
+READ_DOT_ENV_FILE = env.bool('DJANGO_READ_DOT_ENV_FILE', default=True)
+if READ_DOT_ENV_FILE:
+    env.read_env(str(BASE_DIR / '.env'))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-@gkz+hqbv+q1&#nu!!4@t%l-h2^nv#63epum@+(tc9*(wa5nw-'
+SECRET_KEY = env('DJANGO_SECRET_KEY', default='i(zx*t1-=7y!48ikxugev_*!)aeb#7&kbwvyyd1ccoe=qwqj3=')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [env('AWS_DOMAIN')]
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:8080',

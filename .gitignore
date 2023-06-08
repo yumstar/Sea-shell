@@ -9,7 +9,7 @@ media
 
 # Backup files # 
 *.bak 
-
+.idea/
 # If you are using PyCharm # 
 # User-specific stuff
 .idea/**/workspace.xml
@@ -162,3 +162,7 @@ seashell_client/*.ntvs*
 seashell_client/*.njsproj
 seashell_client/*.sln
 seashell_client/*.sw?
+.idea/misc.xml
+seashell_server/requirements.txt
+seashell_server/zappa_settings.json
+seashell_server/seashell-dev-*.zip
