@@ -20,6 +20,7 @@ env = environ.Env()
 READ_DOT_ENV_FILE = env.bool('DJANGO_READ_DOT_ENV_FILE', default=True)
 if READ_DOT_ENV_FILE:
     env.read_env(str(BASE_DIR / '.env'))
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -29,7 +30,7 @@ SECRET_KEY = env('DJANGO_SECRET_KEY', default='i(zx*t1-=7y!48ikxugev_*!)aeb#7&kb
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [env('AWS_DOMAIN')]
+ALLOWED_HOSTS = [env('AWS_DOMAIN'), 'localhost']
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:8080',
@@ -90,15 +91,26 @@ WSGI_APPLICATION = 'seashell.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-    'ENGINE': 'django.db.backends.postgresql',
-    'OPTIONS': {
-            'service': 'seashell_db_service',
+if env.bool("REMOTE_DB"):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': env('DB_NAME'),
+            'USER': env('DB_USER'),
+            'PASSWORD': env('DB_PASSWORD'),
+            'HOST': env('DB_HOST'),
+            'PORT': env('DB_PORT'),
+        } 
+    }
+else:
+    DATABASES = {
+        'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'OPTIONS': {
+                'service': 'seashell_db_service',
+            }
         }
     }
-}
 
 #### User Models
 AUTH_USER_MODEL = 'seashell_center.CenterUser'

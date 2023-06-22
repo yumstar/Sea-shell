@@ -8,7 +8,14 @@ export const useAuthStatusStore = defineStore('authStatus',() => {
     const token = ref($cookies.get('csrftoken'))
     const getToken = computed(() => token.value)
     const getIsAuthenticated = computed(() => isAuthenticated.value)
-    const authUrl = ref("http://127.0.0.1:8000/api/centerUser/") 
+    var url
+    if (process.env.VUE_APP_STAGE == 'prod'){
+        url = process.env.VUE_APP_LAMBDA_ENDPOINT + "api/centerUser/"
+      }
+      else{
+        url = "http://127.0.0.1:8000/api/centerUser/"
+      } 
+    const authUrl = ref(url) 
     async function signOut() {
         try {
             await axios.post(authUrl.value + "signout", {})

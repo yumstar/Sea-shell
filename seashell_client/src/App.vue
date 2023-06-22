@@ -15,9 +15,16 @@ import { useAuthStatusStore } from "@/stores/authStatus";
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
-
+console.log(process.env.VUE_APP_STAGE)
+var url;
+if (process.env.VUE_APP_STAGE == 'prod'){
+  url = process.env.VUE_APP_LAMBDA_ENDPOINT
+}
+else{
+  url = "http://127.0.0.1:8000"
+} 
 export const client = axios.create({
-  baseURL: "http://127.0.0.1:8000"
+  baseURL: url
 })
 router.beforeEach(async (to) => {
   const authStatusStore = useAuthStatusStore()
