@@ -32,7 +32,7 @@ export const useAuthStatusStore = defineStore('authStatus',() => {
     }
     async function signIn(creds) {
         try{
-            await axios.post(authUrl.value + "signin",  creds)
+            await axios.post(authUrl.value + "signin",  creds, {withCredentials: true, xsrfCookieName: 'csrftoken', xsrfHeaderName: 'X-CSRFToken'})
             token.value = $cookies.get('csrftoken')
             isAuthenticated.value = true
         }
