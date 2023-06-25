@@ -30,7 +30,7 @@ SECRET_KEY = env('DJANGO_SECRET_KEY', default='i(zx*t1-=7y!48ikxugev_*!)aeb#7&kb
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [env('AWS_DOMAIN'), 'localhost']
+ALLOWED_HOSTS = [env('AWS_DOMAIN'), 'localhost', '127.0.0.1']
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:8080',

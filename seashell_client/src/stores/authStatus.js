@@ -2,6 +2,9 @@ import { defineStore } from 'pinia'
 import {computed, ref} from "vue"
 import axios from 'axios'
 import { app } from '@/main'
+axios.defaults.xsrfCookieName = 'csrftoken';
+axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+axios.defaults.withCredentials = true;
 export const useAuthStatusStore = defineStore('authStatus',() => {
     const $cookies = app.$cookies
     const isAuthenticated = ref($cookies.get('csrftoken') && $cookies.get('csrftoken').length > 0)

@@ -15,7 +15,6 @@ import { useAuthStatusStore } from "@/stores/authStatus";
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
-console.log(process.env.VUE_APP_STAGE)
 var url;
 if (process.env.VUE_APP_STAGE == 'prod'){
   url = process.env.VUE_APP_LAMBDA_ENDPOINT
