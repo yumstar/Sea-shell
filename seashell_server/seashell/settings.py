@@ -39,13 +39,14 @@ CORS_ALLOWED_ORIGINS = [
 ]
 CORS_ALLOW_CREDENTIALS = True
 CSRF_TRUSTED_ORIGINS = ['http://localhost:8080', 'http://127.0.0.1:8080', 'http://0.0.0.0']
-SECURE_COOKIE = env('STAGE', default='dev')
+SECURE_COOKIE = env('BACKEND_STAGE')
 if SECURE_COOKIE == 'prod':
     CSRF_COOKIE_SECURE = True
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SAMESITE = 'None'
     SESSION_COOKIE_SAMESITE = 'None'
-
+#
+#
 # Application definition
 
 INSTALLED_APPS = [

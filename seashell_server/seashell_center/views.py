@@ -10,6 +10,9 @@ from .models import Message, Tag, DayExperience, CenterUser
 from .permissions import IsUser
 from django.http import HttpResponse, JsonResponse
 # Create your views here.
+# import environ
+# env = environ.Env()
+# SECURE_COOKIE = env('BACKEND_STAGE')
 
 
 class CenterUserRegister(APIView):
