@@ -21,7 +21,7 @@ export const useAuthStatusStore = defineStore('authStatus',() => {
     const authUrl = ref(url) 
     async function signOut() {
         try {
-            await axios.post(authUrl.value + "signout", {})
+            await axios.post(authUrl.value + "signout", {}, {withCredentials: true, xsrfCookieName: 'csrftoken', xsrfHeaderName: 'X-CSRFToken'})
             $cookies.remove('csrftoken')
             token.value = ''
             isAuthenticated.value = false  
@@ -32,7 +32,7 @@ export const useAuthStatusStore = defineStore('authStatus',() => {
     }
     async function signIn(creds) {
         try{
-            await axios.post(authUrl.value + "signin",  creds, {withCredentials: true, xsrfCookieName: 'csrftoken', xsrfHeaderName: 'X-CSRFToken'})
+            await axios.post(authUrl.value + "signin",  creds, {})
             token.value = $cookies.get('csrftoken')
             isAuthenticated.value = true
         }

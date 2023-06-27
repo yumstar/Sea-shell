@@ -23,7 +23,10 @@ else{
   url = "http://127.0.0.1:8000"
 } 
 export const client = axios.create({
-  baseURL: url
+  baseURL: url,
+  xsrfCookieName: 'csrftoken',
+  xsrfHeaderName: 'X-CSRFToken',
+  withCredentials: true
 })
 router.beforeEach(async (to) => {
   const authStatusStore = useAuthStatusStore()

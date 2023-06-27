@@ -38,7 +38,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://0.0.0.0',
 ]
 CORS_ALLOW_CREDENTIALS = True
-CSRF_TRUSTED_ORIGINS = ['http://localhost:8080', 'http://127.0.0.1:8080', 'http://0.0.0.0']
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8080', 'http://127.0.0.1:8080', 'http://0.0.0.0', env('CLIENT_URL')]
 SECURE_COOKIE = env('BACKEND_STAGE')
 if SECURE_COOKIE == 'prod':
     CSRF_COOKIE_SECURE = True

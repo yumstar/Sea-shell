@@ -14,7 +14,6 @@ from django.http import HttpResponse, JsonResponse
 # env = environ.Env()
 # SECURE_COOKIE = env('BACKEND_STAGE')
 
-
 class CenterUserRegister(APIView):
     permission_classes = (permissions.AllowAny,)
     def post(self, request):
@@ -25,7 +24,6 @@ class CenterUserRegister(APIView):
             if center_user:
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(status=status.HTTP_400_BAD_REQUEST)
-
 
 class CenterUserSignin(APIView):
     permission_classes = (permissions.AllowAny,)
@@ -42,6 +40,8 @@ class CenterUserSignin(APIView):
 
 
 class CenterUserSignout(APIView):
+    permission_classes = (permissions.AllowAny,)
+    authentication_classes = (SessionAuthentication,)
     def post(self, request):
         logout(request)
         return Response({'message': 'Logout sucessful.'}, status=status.HTTP_200_OK)
@@ -53,7 +53,10 @@ class CenterUserView(APIView):
 
     def get(self, request):
         serializer = CenterUserSerializer(request.user)
-        return Response({'user': serializer.data}, status=status.HTTP_200_OK)
+        res = Response({'user': serializer.data}, status=status.HTTP_200_OK)
+        res.delete_cookie('sessionid')
+        res.delete_cookie('csrftoken')
+        return res
 
 
 class TagListView(generics.ListCreateAPIView):
