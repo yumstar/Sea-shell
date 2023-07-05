@@ -27,11 +27,15 @@ export const useAuthStatusStore = defineStore('authStatus',() => {
             isAuthenticated.value = false  
         }
         catch {
+            $cookies.remove('sessionid')
+            $cookies.remove('csrftoken')
             throw Error("Error signing out.")
         }
     }
     async function signIn(creds) {
         try{
+            $cookies.remove('sessionid')
+            $cookies.remove('csrftoken')
             await axios.post(authUrl.value + "signin",  creds, {})
             token.value = $cookies.get('csrftoken')
             isAuthenticated.value = true

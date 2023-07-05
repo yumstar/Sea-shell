@@ -1,7 +1,9 @@
 <template>
+  <div class="app-container flex flex-col min-h-screen">
   <NavBar></NavBar>
-  <router-view class="app-body"></router-view>
+  <router-view class="app-body mt-5"></router-view>
   <AppFooter></AppFooter>
+</div>
 </template>
 
 <script>
