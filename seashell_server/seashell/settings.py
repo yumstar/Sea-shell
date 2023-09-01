@@ -58,7 +58,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'seashell_center',
     'rest_framework',
-    'corsheaders'
+    'corsheaders',
+    'knox'
 ]
 
 MIDDLEWARE = [
@@ -161,6 +162,10 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),
+}
 
 # CACHES = {
 #     "default": {
