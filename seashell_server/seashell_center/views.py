@@ -9,6 +9,8 @@ from .validation import validate_user_data, validate_user_email, validate_user_p
 from .models import Message, Tag, DayExperience, CenterUser
 from .permissions import IsUser
 from django.http import HttpResponse, JsonResponse
+from knox.auth import TokenAuthentication
+from knox.views import LoginView
 # Create your views here.
 # import environ
 # env = environ.Env()
@@ -25,9 +27,9 @@ class CenterUserRegister(APIView):
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
-class CenterUserSignin(APIView):
+class CenterUserSignin(LoginView):
     permission_classes = (permissions.AllowAny,)
-    authentication_classes = (SessionAuthentication,)
+    authentication_classes = (TokenAuthentication,)
 
     def post(self, request):
         assert validate_user_email(request.data)
@@ -36,12 +38,13 @@ class CenterUserSignin(APIView):
         if serializer.is_valid(raise_exception=True):
             authenticated_user = serializer.authenticate_user(request.data)
             login(request, authenticated_user)
-            return Response({'message': 'Login sucessful.'}, status=status.HTTP_200_OK)
+            return super(CenterUserSignin, self).post(request, format=None)
+            # return Response({'message': 'Login sucessful.'}, status=status.HTTP_200_OK)
 
 
 class CenterUserSignout(APIView):
     permission_classes = (permissions.AllowAny,)
-    authentication_classes = (SessionAuthentication,)
+    authentication_classes = (TokenAuthentication,)
     def post(self, request):
         logout(request)
         return Response({'message': 'Logout sucessful.'}, status=status.HTTP_200_OK)
@@ -49,7 +52,7 @@ class CenterUserSignout(APIView):
 
 class CenterUserView(APIView):
     permission_classes = (permissions.IsAuthenticated,)
-    authentication_classes = (SessionAuthentication,)
+    authentication_classes = (TokenAuthentication,)
 
     def get(self, request):
         serializer = CenterUserSerializer(request.user)
