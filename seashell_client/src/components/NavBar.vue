@@ -7,8 +7,7 @@
                 </router-link>
             </template>
             <template #start>
-                <img alt="logo" src="../assets/seashell.png" id="app-logo" draggable="false" class="h-14 w-14 mx-auto"/>
-                <h1 class="text-3xl"> Seashell</h1>
+                <img alt="logo" src="../assets/logo-nobg.png" id="app-logo" draggable="false" class="max-h-20 max-w-20 mx-auto"/>
             </template>
         </Menubar>
     </div>
