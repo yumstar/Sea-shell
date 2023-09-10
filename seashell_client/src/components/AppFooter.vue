@@ -1,6 +1,6 @@
 <template>
     <div class="footer mt-auto">
-        <a href="https://www.flaticon.com/free-icons/seashell" title="seashell icons">Seashell icons created by Freepik - Flaticon</a>
+        <!-- <a href="https://www.flaticon.com/free-icons/seashell" title="seashell icons">Seashell icons created by Freepik - Flaticon</a> -->
         <Button type="button" label="sign-out" @click="signOut()" class="mx-1 my-2">Sign Out</Button>
     </div>
 </template>
